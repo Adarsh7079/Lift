@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elevator Web App</title>
+    <style>
+      /* Add your CSS styling here */
+      /* You can customize the styles based on your design preferences */
+      .elevator {
+        width: 50px;
+        height: 80px;
+        background-color: #3498db;
+        position: absolute;
+        transition: top 5s linear;
+      }
+      .level {
+        margin: 20px;
+      }
+      button {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="level">
+      <h2>Level 2</h2>
+      <button onclick="requestDown(2)">DOWN</button>
+    </div>
+    <div class="level">
+      <h2>Level 1</h2>
+      <button onclick="requestUp(1)">Down</button>
+      <button onclick="requestDown(1)">Up</button>
+    </div>
+
+    <div class="level">
+      <h2>Ground Level</h2>
+      <button onclick="requestUp(0)">UP</button>
+    </div>
+
+    <div id="elevator" class="elevator"></div>
+
+    <script>
+      // JavaScript implementation
+
+      let currentLevel = 0; // Initial level
+      let destinationLevel = 0;
+
+      function moveElevator(destination) {
+        const elevator = document.getElementById("elevator");
+        elevator.style.top = destination * 100 + "px";
+        currentLevel = destination;
+        window.scrollTo(0, destination * window.innerHeight);
+        setTimeout(() => {
+          checkNextMove();
+        }, destination * 5000);
+      }
+
+      function checkNextMove() {
+        if (currentLevel === destinationLevel) {
+          // Elevator has reached the destination
+          console.log(`Elevator has reached level ${destinationLevel}`);
+        } else {
+          // Continue moving to the next destination
+          moveElevator(destinationLevel);
+        }
+      }
+
+      function requestUp(level) {
+        if (level === 0) {
+          // Moving from Ground level to Level 1
+          destinationLevel = 2;
+          checkNextMove();
+        } else if (level === 1 ) {
+          // Moving from Level 1 to Level 2
+          destinationLevel = 2;
+          checkNextMove();
+        }
+        // Ignore requests from Level 2 as only DOWN button is allowed there
+      }
+
+      function requestDown(level) {
+        if (level === 2) {
+          // Moving from Level 2 to Level 1
+          destinationLevel = 1;
+          checkNextMove();
+        } else if (level === 1) {
+          // Moving from Level 1 to Ground level
+          destinationLevel = 0;
+          checkNextMove();
+        }
+        // Ignore requests from Ground level as only UP button is allowed there
+      }
+    </script>
+  </body>
+</html>

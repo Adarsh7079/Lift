@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elevator Web App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div>
+      <div>
+        <div class="elevator-container">
+          <h2>Level 2</h2>
+          <button onclick="requestDown(2)">Down</button>
+        </div>
+
+        <div class="elevator-container">
+          <h2>Level 1</h2>
+          <button onclick="requestUp(1)">Up</button>
+          <button onclick="requestDown(1)">Down</button>
+        </div>
+
+        <div class="elevator-container">
+          <h2>Ground Floor</h2>
+          <button onclick="requestUp(0)">Up</button>
+        </div>
+      </div>
+      <div class="elevator"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
